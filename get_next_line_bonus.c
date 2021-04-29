@@ -6,7 +6,7 @@
 /*   By: mmasuda <mmasuda@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 23:21:10 by mmasuda           #+#    #+#             */
-/*   Updated: 2021/04/29 14:01:48 by mmasuda          ###   ########.fr       */
+/*   Updated: 2021/04/29 23:20:59 by mmasuda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,21 +43,19 @@ int	ft_read(int fd, char **save)
 	while (ret >= 0)
 	{
 		ret = read(fd, buf, BUFFER_SIZE);
-		if (ret == -1)
-			break ;
-		buf[ret] = '\0';
-		if (ret == 0)
+		if (ret >= 0)
+			buf[ret] = '\0';
+		if (ret == 0 || ret == -1)
 			break ;
 		tmp = ft_strjoin(*save, buf);
 		free(*save);
 		*save = tmp;
 		if ((ft_strchr_idx(*save, '\n')) >= 0)
-		{
-			free(buf);
-			return (1);
-		}
+			break ;
 	}
 	free(buf);
+	if (ret > 0)
+		return (1);
 	return (ret);
 }
 
@@ -87,23 +85,25 @@ char	*ft_result_if_else(char **line, char *save, int result, int *tosave)
 
 int	get_next_line(int fd, char **line)
 {
-	static char	*save;
+	static char	*save[256];
 	char		*tmp;
 	int			tosave;
 	int			result;
 
 	result = 1;
 	tosave = 0;
-	if (fd < 0 || !line || BUFFER_SIZE <= 0)
+	if (fd < 0 || 255 < fd || !line || BUFFER_SIZE <= 0)
+	{
+		*line = NULL;
 		return (-1);
-	*line = NULL;
-	if (!save || ft_strchr_idx(save, '\n') < 0)
-		result = ft_read(fd, &save);
-	tmp = ft_result_if_else(line, save, result, &tosave);
-	if ((tosave == 0 && !tmp && !save) || result == -1)
+	}
+	if (!save[fd] || ft_strchr_idx(save[fd], '\n') < 0)
+		result = ft_read(fd, &save[fd]);
+	tmp = ft_result_if_else(line, save[fd], result, &tosave);
+	if ((tosave == 0 && !tmp && !save[fd]) || result == -1)
 		return (result);
-	*line = ft_substr(save, 0, tosave);
-	free(save);
-	save = tmp;
+	*line = ft_substr(save[fd], 0, tosave);
+	free(save[fd]);
+	save[fd] = tmp;
 	return (result);
 }
