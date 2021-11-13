@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmasuda <mmasuda@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: mmasuda <mmasuda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 17:42:23 by mmasuda           #+#    #+#             */
-/*   Updated: 2021/04/28 17:23:25 by mmasuda          ###   ########.fr       */
+/*   Updated: 2021/11/13 15:34:32 by mmasuda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
+
+#include "get_next_line.h"
 
 size_t	ft_strlen(const char *s)
 {
@@ -24,7 +26,7 @@ size_t	ft_strlen(const char *s)
 
 static char	*ft_strcpy(char *dst, const char *src)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (src[i] != '\0')
@@ -39,7 +41,7 @@ static char	*ft_strcpy(char *dst, const char *src)
 char	*ft_strdup(const char *s1)
 {
 	char	*s2;
-	int		len;
+	size_t		len;
 
 	len = ft_strlen(s1);
 	s2 = (char *)malloc(sizeof(char) * (len + 1));
@@ -51,9 +53,9 @@ char	*ft_strdup(const char *s1)
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*newstr;
-	int		s1_len;
-	int		s2_len;
-	int		i;
+	size_t		s1_len;
+	size_t		s2_len;
+	size_t		i;
 
 	if (s1)
 		s1_len = ft_strlen(s1);
@@ -75,7 +77,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (newstr);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, size_t start, size_t len)
 {
 	size_t	i;
 	char	*substr;

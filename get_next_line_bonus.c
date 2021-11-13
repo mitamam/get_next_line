@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmasuda <mmasuda@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: mmasuda <mmasuda@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/27 23:21:10 by mmasuda           #+#    #+#             */
-/*   Updated: 2021/04/29 23:20:59 by mmasuda          ###   ########.fr       */
+/*   Updated: 2021/11/13 15:30:55 by mmasuda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-int	ft_strchr_idx(const char *s, int c)
+size_t	ft_strchr_idx(const char *s, int c)
 {
 	unsigned char	char_c;
-	int				i;
+	size_t				i;
 
 	char_c = (char)c;
 	i = 0;
@@ -59,7 +59,7 @@ int	ft_read(int fd, char **save)
 	return (ret);
 }
 
-char	*ft_result_if_else(char **line, char *save, int result, int *tosave)
+char	*ft_result_if_else(char **line, char *save, int result, size_t *tosave)
 {
 	if (result < 0)
 	{
@@ -87,7 +87,7 @@ int	get_next_line(int fd, char **line)
 {
 	static char	*save[256];
 	char		*tmp;
-	int			tosave;
+	size_t			tosave;
 	int			result;
 
 	result = 1;
