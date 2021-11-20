@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mmasuda <mmasuda@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mmasuda <mmasuda@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 17:42:23 by mmasuda           #+#    #+#             */
-/*   Updated: 2021/11/13 15:33:10 by mmasuda          ###   ########.fr       */
+/*   Updated: 2021/04/27 23:28:40 by mmasuda          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ size_t	ft_strlen(const char *s)
 
 static char	*ft_strcpy(char *dst, const char *src)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	while (src[i] != '\0')
@@ -39,7 +39,7 @@ static char	*ft_strcpy(char *dst, const char *src)
 char	*ft_strdup(const char *s1)
 {
 	char	*s2;
-	size_t		len;
+	int		len;
 
 	len = ft_strlen(s1);
 	s2 = (char *)malloc(sizeof(char) * (len + 1));
@@ -51,9 +51,9 @@ char	*ft_strdup(const char *s1)
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*newstr;
-	size_t		s1_len;
-	size_t		s2_len;
-	size_t		i;
+	int		s1_len;
+	int		s2_len;
+	int		i;
 
 	if (s1)
 		s1_len = ft_strlen(s1);
@@ -75,7 +75,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (newstr);
 }
 
-char	*ft_substr(char const *s, size_t start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	size_t	i;
 	char	*substr;
